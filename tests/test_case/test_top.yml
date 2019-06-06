@@ -1,0 +1,23 @@
+test_top:
+  -
+    method: launchApp # 重启 APP
+  -
+    method: click
+    element: click_ad_skip
+    name: 广告跳过按钮
+    is_displayed: False
+  -
+    method: click
+    element: 发现
+    name: 导航发现按钮
+  -
+    method: swip_up
+  -
+    method: get_text
+    element: com.sina.weibo:id/item_text
+    name: 热门话题title
+    assert_text: 热门话题
+  -
+    method: screenshot_element
+    element: com.sina.weibo:id/stubCardArticleTitleLayout
+    name: 第一条热门话题截图

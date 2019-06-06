@@ -1,0 +1,30 @@
+test_search:
+  -
+    method: launchApp # 重启 APP
+  -
+    method: click
+    element: click_ad_skip
+    name: 广告跳过按钮
+    is_displayed: False
+  -
+    method: click
+    element: 发现
+    name: 导航发现按钮
+  -
+    method: sleep
+    element: 3
+  -
+    method: set_text
+    element: com.sina.weibo:id/tv_search_keyword
+    text: testerhome
+    name: 搜索输入框
+  -
+    method: set_keycode_enter
+  -
+    method: screenshot_element
+    element: //*[@resource-id="com.sina.weibo:id/lv_content"]/android.widget.RelativeLayout[1]
+    name: 搜索内容截图
+  -
+    method: sleep
+    element: 3
+
