@@ -72,9 +72,8 @@ class ElementActions:
         return result['stdout']
 
     def get_app_pid(self):
-        """
-        :param 获取包名PID 进程
-        :return:
+        """ 获取包名PID 进程
+        :return: int PID
         """
         result = self.ADB.shell('"ps | grep {0}"'.format(self.Parameterdict.get('appPackage')))
 
@@ -85,15 +84,21 @@ class ElementActions:
             return False
 
     def set_keycode_search(self):
+        """ 搜索键
+        """
         self._send_key_event('KEYCODE_SEARCH')
 
     def set_keycode_enter(self):
+        """ 回车键
+        """
         self._send_key_event('KEYCODE_ENTER')
 
     def clear(self):
         self.driver.quit()
 
     def launchApp(self):
+        """ 重启应用程序
+        """
         with allure.step("重启应用程序"):
             self.driver.launch_app()
             self.apppid = self.get_app_pid()
@@ -136,7 +141,6 @@ class ElementActions:
         """基础的点击事件
         :param locator: 定位器
         :param count: 点击次数
-        :return:
         """
         if locator.get('index'):
             el = self._find_elements(locator)[locator['index']]
@@ -156,7 +160,6 @@ class ElementActions:
     def get_text(self, locator):
         """获取元素中的text文本
         :param locator: 定位器
-        :return: 如果没有该控件返回None
         """
         L.i("[获取]元素 %s " % locator.get('name'))
 
@@ -168,12 +171,10 @@ class ElementActions:
         return el.text
 
     def set_text(self, locator, clear_first=False, click_first=True):
-        """输入文本
+        """ 输入文本
         :param locator: 定位器
         :param clear_first: 是否先清空原来文本
         :param click_first: 是否先点击选中
-        :return
-        :raises: NotFoundElementError
         """
         value = locator.get('text')
         if click_first:
@@ -187,7 +188,6 @@ class ElementActions:
     def swipeElementUp(self, element):
         """ IOS专用 在元素内部滑动
         :param element: 以查找到的元素
-        :return:
         """
         scrolldict = {'direction': 'left', 'element': element.id}
         self.driver.execute_script('mobile: swipe', scrolldict)
@@ -197,7 +197,6 @@ class ElementActions:
         :param count: 滑动次数
         :param method: 传入的方法 method(action) ,如果返回为True,则终止刷新
         :param speed: 滑动速度 ms
-        :return:
         """
         if count == 1:
             self.driver.swipe(self.width / 2, self.height * 2 / 5, self.width / 2, self.height * 4 / 5, speed)
@@ -261,21 +260,6 @@ class ElementActions:
             self.driver.swipe(self.width / 8, self.height * height, self.width * 7 / 8, self.height * height, speed)
             self.sleep(2)
             L.i("[滑动]向右滑动 ")
-
-    def is_toast_show(self, message, wait=5):
-        """ Android：是否有对应Toast显示,常用于断言
-        :param message: Toast信息
-        :param wait: 等待时间,默认5秒
-        :return:
-        """
-        locator = {'name': '[Toast] %s' % message, 'time': wait, 'type': 'xpath',
-                   'value': '//*[contains(@text,\'%s\')]' % message}
-        try:
-            el = self._find_element(locator, is_need_displayed=False)
-            return el is not None
-        except NotFoundElementError:
-            L.w("[Toast] 页面中未能找到 %s toast" % locator)
-            return False
 
     def is_element_displayed(self, locator, is_raise=False, element=True):
         """ ：控件是否显示e
