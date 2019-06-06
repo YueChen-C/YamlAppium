@@ -51,9 +51,9 @@ test_index:
  |      检测权限窗口 
 ```
 #### 运行方式
-> pytest -s ./test_case/test_ranking.yml --alluredir '..\report\\test'
+> pytest -s ./test_case/test_ranking.yml --alluredir './report/test'
 
 或者直接运行文件目录
 
 使用方法和基本 pytest 用法没有太大区别
-> pytest -s ./test_case --alluredir '..\report\\test'
+> pytest -s ./test_case --alluredir './report/test'
