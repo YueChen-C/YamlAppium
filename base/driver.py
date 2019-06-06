@@ -29,8 +29,10 @@ class Singleton(object):
                             'platformName': 'Android',
                             'platformVersion': '9.0',
                             'udid': udid}
+
             driver = webdriver.Remote(host, desired_caps)
             ADB = shell.ADB(udid)
+            desired_caps['platformVersion'] = ADB.get_android_version()
             Action = ElementActions(driver, ADB, Parameterdict=desired_caps)
             orig = super(Singleton, cls)
             cls._instance = orig.__new__(cls, *args, **kw)

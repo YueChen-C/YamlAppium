@@ -101,7 +101,7 @@ class YamlTest(pytest.Item):
                 pass
 
     def repr_failure(self, excinfo):
-        """自定义报错信息，如果没有定义则会打印堆栈错误信息 """
+        """自定义报错信息，如果没有定义则会默认打印错误堆栈信息，因为比较乱，所以这里自定义一下 """
         if isinstance(excinfo.value, Exception):
             return '测试类名称：{} \n' \
                    '输入参数：{} \n' \
