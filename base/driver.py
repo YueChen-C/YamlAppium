@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 """
-@ 项目：RCEflask
-@ 模块：
+@ Author：YueC
+@ Description：driver 驱动
 """
+
 from appium import webdriver
 from base.action import ElementActions
 from utils import shell

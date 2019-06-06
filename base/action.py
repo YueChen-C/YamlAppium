@@ -1,5 +1,10 @@
-import time
+# -*- coding: utf-8 -*-
+"""
+@ Author：YueC
+@ Description：Appium api 封装层
+"""
 
+import time
 import allure
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
@@ -358,17 +363,17 @@ class ElementActions:
         self.driver.set_network_connection(event_list[arg])
 
     def photograph(self):
+        """不同系统手机拍照+确认"""
         str = self.ADB.get_android_brand()
         if 'MI' in str:
             '''
-            MIUI系统手机拍照确认
+            MIUI
             '''
             self.driver.press_keycode(27)
             self.click(Ldict('com.miui.gallery:id/ok', By.ID, "确认按钮"))
         elif 'vivo' in str:
             self.click(Ldict('com.android.camera:id/shutter_button', By.ID, '拍照按钮'))
             self.click(Ldict('com.android.camera:id/btn_done', By.ID, '确认按钮'))
-
         # 三星
         elif 'G9350' in str:
             self.driver.press_keycode(27)

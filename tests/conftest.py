@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# content of conftest.py
+"""
+@ Author：YueC
+@ Description：Pytest hook Appium
+"""
 import datetime
 import os
 import sys
-
 import allure
 import pytest
-
-
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from base.driver import DriverClient
 
